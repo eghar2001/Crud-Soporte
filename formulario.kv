@@ -1,0 +1,109 @@
+
+ScreenManager:
+   Screen:
+      on_pre_enter: app.actualizar_productos()
+      name: "producto_list"
+
+      GridLayout:
+         cols:2
+         RecycleView:
+            id: recycle_productos
+            data : [producto.get_data() for producto in app.buscar_productos()]
+            viewclass:"Button"
+            RecycleBoxLayout:
+               on_press: print(self.id)
+               orientation: "vertical"
+               default_size: None, dp(56)
+               default_size_hint: 1, None
+               size_hint_y: None
+               height: self.minimum_height
+
+
+         Button:
+            text: "Agregar producto"
+            on_press:
+               root.current = "producto_agregar"
+               root.transition.direction = "left"
+
+          #PREGUNTAR COMO SE MUESTRA UNA LISTA
+
+   Screen:
+      name: "producto_agregar"
+      GridLayout:
+         rows: 6
+         cols:2
+
+         Label:
+            text: "Ingrese nombre"
+         TextInput:
+            id: nombre
+
+         Label:
+            text: "Ingrese una cantidad"
+         TextInput:
+            id: cantidad
+
+         Label:
+            text: "Ingrese un precio"
+         TextInput:
+            id: precio
+
+
+
+         Button:
+            text: "Borrar"
+            on_press: app.borrar()
+         Button:
+            text: "Enviar"
+            on_press:
+               app.enviar()
+               root.current = "producto_list"
+
+         Button:
+            text: "Ir a Lista"
+            col_default_width: 2
+            col_force_default: True
+            on_press:
+               root.current = "producto_list"
+               root.transition.direction = "right"
+   Screen:
+      name: "producto_modificar"
+      GridLayout:
+         rows: 6
+         cols:2
+
+         Label:
+            text: "Ingrese nombre"
+         TextInput:
+            id: nombre
+            text:
+
+         Label:
+            text: "Ingrese una cantidad"
+         TextInput:
+            id: cantidad
+
+         Label:
+            text: "Ingrese un precio"
+         TextInput:
+            id: precio
+
+
+
+         Button:
+            text: "Borrar"
+            on_press: app.borrar()
+         Button:
+            text: "modificar"
+            on_press:
+               app.modificar()
+               root.current = "producto_list"
+
+         Button:
+            text: "Ir a Lista"
+            col_default_width: 2
+            col_force_default: True
+            on_press:
+               root.current = "producto_list"
+               root.transition.direction = "right"
+
