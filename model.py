@@ -25,8 +25,7 @@ class Producto:
     def get_text(self):
         return f"{self.nombre} x {self.cantidad} -- ${self.precio}"
 
-    def get_data(self):
-        return {"text":self.get_text(), "id": self.id}
+
 
 
     @property

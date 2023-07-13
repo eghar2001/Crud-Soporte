@@ -8,10 +8,9 @@ ScreenManager:
          cols:2
          RecycleView:
             id: recycle_productos
-            data : [producto.get_data() for producto in app.buscar_productos()]
+            data : [{"text":producto.get_text()} for producto in app.buscar_productos()]
             viewclass:"Button"
             RecycleBoxLayout:
-               on_press: print(self.id)
                orientation: "vertical"
                default_size: None, dp(56)
                default_size_hint: 1, None
@@ -36,17 +35,19 @@ ScreenManager:
          Label:
             text: "Ingrese nombre"
          TextInput:
-            id: nombre
+            id: "nombre"
 
          Label:
             text: "Ingrese una cantidad"
          TextInput:
-            id: cantidad
+            text : "0"
+            id: "cantidad"
 
          Label:
             text: "Ingrese un precio"
          TextInput:
-            id: precio
+            text: "0"
+            id: "precio"
 
 
 

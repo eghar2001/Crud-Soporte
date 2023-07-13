@@ -8,6 +8,8 @@ class Formulario(App):
 
     productos = producto_logic.find_all()
     def enviar(self):
+
+
         producto = Producto(
             nombre=self.root.ids.nombre.text,
             cantidad = int(self.root.ids.cantidad.text),
