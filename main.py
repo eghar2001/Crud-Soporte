@@ -8,7 +8,7 @@ class Formulario(App):
 
     productos = producto_logic.find_all()
     def enviar(self):
-
+        self.root.ids.cantidad.text
 
         producto = Producto(
             nombre=self.root.ids.nombre.text,
@@ -18,7 +18,7 @@ class Formulario(App):
 
         producto = self.producto_logic.crear_producto(producto)
 
-        self.root.ids.recycle_productos.data.append(producto.get_data())
+        self.root.ids.recycle_productos.data.append({"text",producto.get_text()})
         print("Se ha creado un producto con exito!!")
         self.borrar()
 

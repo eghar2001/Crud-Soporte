@@ -35,19 +35,19 @@ ScreenManager:
          Label:
             text: "Ingrese nombre"
          TextInput:
-            id: "nombre"
+            id: nombre
 
          Label:
             text: "Ingrese una cantidad"
          TextInput:
             text : "0"
-            id: "cantidad"
+            id: cantidad
 
          Label:
             text: "Ingrese un precio"
          TextInput:
             text: "0"
-            id: "precio"
+            id: precio
 
 
 
@@ -67,44 +67,5 @@ ScreenManager:
             on_press:
                root.current = "producto_list"
                root.transition.direction = "right"
-   Screen:
-      name: "producto_modificar"
-      GridLayout:
-         rows: 6
-         cols:2
 
-         Label:
-            text: "Ingrese nombre"
-         TextInput:
-            id: nombre
-            text:
-
-         Label:
-            text: "Ingrese una cantidad"
-         TextInput:
-            id: cantidad
-
-         Label:
-            text: "Ingrese un precio"
-         TextInput:
-            id: precio
-
-
-
-         Button:
-            text: "Borrar"
-            on_press: app.borrar()
-         Button:
-            text: "modificar"
-            on_press:
-               app.modificar()
-               root.current = "producto_list"
-
-         Button:
-            text: "Ir a Lista"
-            col_default_width: 2
-            col_force_default: True
-            on_press:
-               root.current = "producto_list"
-               root.transition.direction = "right"
 
