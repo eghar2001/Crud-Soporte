@@ -1,15 +1,16 @@
 
 ScreenManager:
+   id:"manager"
    Screen:
-      on_pre_enter: app.actualizar_productos()
-      name: "producto_list"
+
+      name: "producto_lista"
 
       GridLayout:
          cols:2
          RecycleView:
             id: recycle_productos
-            data : [{"text":producto.get_text(), "id":"editar-"+str(producto.id)} for producto in app.buscar_productos()]
-            viewclass:"Button"
+            data : [{"text":producto.get_text(), "id":str(producto.id)} for producto in app.buscar_productos()]
+            viewclass:"RecyclableButton"
             RecycleBoxLayout:
                orientation: "vertical"
                default_size: None, dp(56)
@@ -21,43 +22,73 @@ ScreenManager:
          Button:
             text: "Agregar producto"
             on_press:
+
                root.current = "producto_agregar"
                root.transition.direction = "left"
 
           #PREGUNTAR COMO SE MUESTRA UNA LISTA
+   Screen:
+      name: "producto_editar_o_eliminar"
+      GridLayout:
+         cols:2
+         rows:2
+         Button:
+            text:"Eliminar"
+            on_press:
+               app.borrar_producto()
+         Button:
+            text:"Editar"
+            on_press:
+
+               app.cargar_editar()
+               root.current = "producto_editar"
+
+         Button:
+            text:"Volver"
+            on_press:
+               app.borrar_producto_actual()
+               root.current = "producto_lista"
+               root.transition.direction="right"
+
 
    Screen:
       name: "producto_agregar"
       GridLayout:
          rows: 6
          cols:2
-
          Label:
-            text: "Ingrese nombre"
+            text: "Nombre"
          TextInput:
-            id: nombre
+            id: nombre_agregar
 
          Label:
-            text: "Ingrese una cantidad"
+            text: "Cantidad"
          TextInput:
             text : "0"
-            id: cantidad
+            id: cantidad_agregar
 
          Label:
-            text: "Ingrese un precio"
+            text: "Precio"
          TextInput:
             text: "0"
-            id: precio
+            id: precio_agregar
 
 
 
          Button:
             text: "Borrar"
-            on_press: app.borrar()
-         Button:
-            text: "Enviar"
             on_press:
-               app.enviar()
+               app.root.ids.nombre_agregar = ""
+               app.root.ids.cantidad_agregar = "0"
+               app.root.ids.precio_agregar = "0"
+         Button:
+            text: "Agregar"
+            on_press:
+               app.agregar_producto()
+               root.ids.nombre_agregar.text=""
+               root.ids.cantidad_agregar.text = "0"
+               root.ids.precio_agregar.text = "0"
+
 
          Button:
             text: "Ir a Lista"
@@ -65,7 +96,56 @@ ScreenManager:
             col_force_default: True
             on_press:
                app.cargar_lista()
-               root.current = "producto_list"
+               root.current = "producto_lista"
+               root.transition.direction = "right"
+
+
+   Screen:
+      name: "producto_editar"
+      GridLayout:
+         rows: 6
+         cols:2
+         Label:
+            text: "Nombre"
+         TextInput:
+            id: nombre_editar
+
+         Label:
+            text: "Cantidad"
+         TextInput:
+            text : "0"
+            id: cantidad_editar
+
+         Label:
+            text: "Precio"
+         TextInput:
+            text: "0"
+            id: precio_editar
+
+
+
+         Button:
+            text: "Borrar"
+            on_press:
+               app.root.ids.nombre_editar = ""
+               app.root.ids.cantidad_editar = "0"
+               app.root.ids.precio_editar = "0"
+         Button:
+            text: "Enviar"
+            on_press:
+               app.editar_producto()
+               root.ids.nombre_editar.text=""
+               root.ids.cantidad_editar.text = "0"
+               root.ids.precio_editar.text = "0"
+
+
+         Button:
+            text: "Ir a Lista"
+            col_default_width: 2
+            col_force_default: True
+            on_press:
+               app.cargar_lista()
+               root.current = "producto_lista"
                root.transition.direction = "right"
 
 

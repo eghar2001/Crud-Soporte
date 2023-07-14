@@ -18,3 +18,13 @@ class ProductoLogic:
     def find_all(self):
         productos = self.producto_data.find_all()
         return productos
+
+    def borrar_producto(self, producto: Producto):
+        self.producto_data.borrar_producto(producto)
+
+    def get_one(self,id:int):
+        return self.producto_data.get_one(id)
+
+
+    def editar_producto(self,producto:Producto):
+        self.producto_data.editar_producto(producto)
