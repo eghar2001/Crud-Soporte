@@ -7,7 +7,7 @@ ScreenManager:
          cols:2
          RecycleView:
             id: recycle_productos
-            data : [{"text":producto.get_text()} for producto in app.buscar_productos()]
+            data : [{"text":producto.get_text(), "id":"editar-"+str(producto.id)} for producto in app.buscar_productos()]
             viewclass:"Button"
             RecycleBoxLayout:
                orientation: "vertical"
@@ -57,13 +57,13 @@ ScreenManager:
             text: "Enviar"
             on_press:
                app.enviar()
-               root.current = "producto_list"
 
          Button:
             text: "Ir a Lista"
             col_default_width: 2
             col_force_default: True
             on_press:
+               app.cargar_lista()
                root.current = "producto_list"
                root.transition.direction = "right"
 
