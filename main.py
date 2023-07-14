@@ -1,6 +1,14 @@
 from kivy.app import App
+from kivy.uix.behaviors import FocusBehavior
+from kivy.uix.button import Button
+from kivy.uix.recycleboxlayout import RecycleBoxLayout
+from kivy.uix.recycleview.layout import LayoutSelectionBehavior
+from kivy.uix.recycleview.views import RecycleDataViewBehavior
+
 from model import Producto
 from logica import ProductoLogic
+import re
+
 
 
 class Formulario(App):
@@ -8,7 +16,6 @@ class Formulario(App):
 
     productos = producto_logic.find_all()
     def enviar(self):
-        self.root.ids.cantidad.text
 
         producto = Producto(
             nombre=self.root.ids.nombre.text,
@@ -18,7 +25,6 @@ class Formulario(App):
 
         producto = self.producto_logic.crear_producto(producto)
 
-        self.root.ids.recycle_productos.data.append({"text",producto.get_text()})
         print("Se ha creado un producto con exito!!")
         self.borrar()
 
@@ -33,7 +39,12 @@ class Formulario(App):
     def buscar_productos(self):
         return self.producto_logic.find_all()
 
+    def cargar_lista(self):
+        self.root.ids.recycle_productos.data = [{"text":producto.get_text(),"id":producto.id} for producto in self.buscar_productos()]
 
+    def editar(self, id:int):
+        print("se esta ejecutando el editar")
+        print(id)
     pass
 
 
