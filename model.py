@@ -36,10 +36,22 @@ class Producto:
     def nombre(self) -> str:
         return self._nombre
 
+    @nombre.setter
+    def nombre(self, nuevo_nombre:str):
+        self._nombre=nuevo_nombre
+
     @property
     def cantidad(self) -> int:
         return self._cantidad
 
+    @cantidad.setter
+    def cantidad(self, nueva_cantidad: int):
+        self._cantidad = nueva_cantidad
+
     @property
     def precio(self) -> float:
         return round(self._precio,2)
+
+    @precio.setter
+    def precio(self, nueva_precio: int):
+        self._precio = nueva_precio
